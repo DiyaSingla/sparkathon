@@ -2,21 +2,21 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class Dataset {
-   int S_no = 0;
-   String brand = "";
-   String product_name = "";
-   double weight = 0.0;
-   double screen_size = 0.0;
-   double product_lifetime = 0.0;
-   double energy_demand = 0.0;
-   String assembly_location = "";
-   String use_location = "";
-   double manufacturing_impact = 0.0;
-   double transportation_impact = 0.0;
-   double end_of_life_impact = 0.0;
-   double use_impact = 0.0;
-   double carbon_footprint = 0.0;
-   double price = 0.0;
+  var S_no;
+  var brand;
+  var product_name;
+  var weight;
+  var screen_size;
+  var product_lifetime;
+  var energy_demand;
+  var assembly_location;
+  var use_location;
+  var manufacturing_impact;
+  var transportation_impact;
+  var end_of_life_impact;
+  var use_impact;
+  var carbon_footprint;
+  var price;
 
   Dataset.one() {}
 
@@ -58,9 +58,7 @@ class Dataset {
 
   List<Dataset> decodeDataset(String responseBody) {
     final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
-    return parsed
-        .map<Dataset>((json) => Dataset.fromJson(json))
-        .toList();
+    return parsed.map<Dataset>((json) => Dataset.fromJson(json)).toList();
   }
 
   Future<List<Dataset>> fetchAll() async {

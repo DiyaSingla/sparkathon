@@ -4,7 +4,6 @@ import 'package:sparkathon_app/page.dart';
 import 'api.dart';
 import 'homepage.dart';
 
-
 void main() {
   runApp(
     MyApp(),
