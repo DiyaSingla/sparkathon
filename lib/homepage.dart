@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -21,8 +22,10 @@ class _HomePageState extends State<HomePage> {
   List<int> recommendedProductIndices = [];
 
   Future<void> fetchRecommendations(int product_index) async {
+    
     final response = await http.get(
         Uri.parse('http://127.0.0.1:5000/recommendations/${product_index}'));
+    
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       setState(() {
@@ -30,7 +33,7 @@ class _HomePageState extends State<HomePage> {
         print(recommendedProductIndices);
       });
     } else {
-      // Handle error
+
     }
   }
 
@@ -73,8 +76,8 @@ class _HomePageState extends State<HomePage> {
       itemCount: dataList.length,
       itemBuilder: (context, index) {
         return InkWell(
-            onTap: () {
-              fetchRecommendations(index);
+            onTap: () async {
+              await fetchRecommendations(index);
               Navigator.push(
                 context,
                 MaterialPageRoute(

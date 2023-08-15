@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sparkathon_app/api.dart';
 import 'package:sparkathon_app/productCard.dart';
 
-class ProductPage extends StatelessWidget {
+class ProductPage extends StatefulWidget {
   final Dataset data;
   final List<Dataset> dataList;
   final List<int> recommend;
@@ -15,11 +15,17 @@ class ProductPage extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<ProductPage> createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage> {
+  @override
   Widget build(BuildContext context) {
-    List<int> rec;
+    print(widget.recommend);
+    print(widget.recommend.length);
     return Scaffold(
       appBar: AppBar(
-        title: Text(data.product_name),
+        title: Text(widget.data.product_name),
         backgroundColor: Colors.black,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
@@ -36,7 +42,7 @@ class ProductPage extends StatelessWidget {
             Container(
               alignment: Alignment.center,
               padding: EdgeInsets.all(10),
-              child: Image.asset('images/${data.brand}.png'),
+              child: Image.asset('images/${widget.data.brand}.png'),
             ),
             // Laptop image
             Container(
@@ -55,13 +61,13 @@ class ProductPage extends StatelessWidget {
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 16),
-                  Text('Brand: ${data.brand}'),
-                  Text('Product Name: ${data.product_name}'),
-                  Text('Price: Rs. ${data.price}'),
-                  Text('Screen Size: ${data.screen_size} inches'),
-                  Text('Weight: ${data.weight} kg'),
-                  Text('Annual Energy Demand: ${data.energy_demand} kWh'),
-                  Text('Carbon Footprint: ${data.carbon_footprint} kg CO2'),
+                  Text('Brand: ${widget.data.brand}'),
+                  Text('Product Name: ${widget.data.product_name}'),
+                  Text('Price: Rs. ${widget.data.price}'),
+                  Text('Screen Size: ${widget.data.screen_size} inches'),
+                  Text('Weight: ${widget.data.weight} kg'),
+                  Text('Annual Energy Demand: ${widget.data.energy_demand} kWh'),
+                  Text('Carbon Footprint: ${widget.data.carbon_footprint} kg CO2'),
                 ],
               ),
             ),
@@ -76,17 +82,20 @@ class ProductPage extends StatelessWidget {
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 16),
+                  
                   // Recommended product cards
                   SizedBox(
-                    height: 220, // Adjust the height as needed
+                    height: 300, // Adjust the height as needed
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
+                      
                       itemCount:
-                          recommend.length, // Number of recommended products
+                          5, // Number of recommended products
                       itemBuilder: (context, index) {
                         return SizedBox(
-                          width: 150,
-                          child: buildProductCard(dataList, recommend[index]),
+                          width:200,
+
+                          child: buildProductCard(widget.dataList, widget.recommend[index])
                         );
                       },
                     ),
