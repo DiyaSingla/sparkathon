@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:sparkathon_app/api.dart';
+import 'package:sparkathon_app/productCard.dart';
 
 class ProductPage extends StatelessWidget {
   final Dataset data;
   final List<Dataset> dataList;
   final List<int> recommend;
-  
 
-  const ProductPage({Key? key, required this.data, required this.dataList, required this.recommend}) : super(key: key);
+  const ProductPage(
+      {Key? key,
+      required this.data,
+      required this.dataList,
+      required this.recommend})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +72,7 @@ class ProductPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Recommended Products',
+                    'Recommended Products with Less Carbon Footprint',
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 16),
@@ -76,18 +81,12 @@ class ProductPage extends StatelessWidget {
                     height: 220, // Adjust the height as needed
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: recommend.length, // Number of recommended products
+                      itemCount:
+                          recommend.length, // Number of recommended products
                       itemBuilder: (context, index) {
                         return SizedBox(
                           width: 150,
-                          child: Card(
-                            elevation: 5,
-                            child: Container(
-                              padding: EdgeInsets.all(16),
-                              // Add recommended product content here
-                              child: Text('Recommended Product ${recommend[index]}'),
-                            ),
-                          ),
+                          child: buildProductCard(dataList, recommend[index]),
                         );
                       },
                     ),
