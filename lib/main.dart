@@ -11,13 +11,11 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primaryColor: Colors.black, // Set the primary color to black
-      ),
+    return const MaterialApp(
+      title: "Sustainix",
       debugShowCheckedModeBanner: false,
       home: MyLogoPage(
-        title: "CO2",
+        title: "Sustainix",
       ),
     );
   }

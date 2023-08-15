@@ -3,11 +3,15 @@ import 'package:sparkathon_app/api.dart';
 
 class ProductPage extends StatelessWidget {
   final Dataset data;
+  final List<Dataset> dataList;
+  final List<int> recommend;
+  
 
-  const ProductPage({Key? key, required this.data}) : super(key: key);
+  const ProductPage({Key? key, required this.data, required this.dataList, required this.recommend}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<int> rec;
     return Scaffold(
       appBar: AppBar(
         title: Text(data.product_name),
@@ -72,7 +76,7 @@ class ProductPage extends StatelessWidget {
                     height: 220, // Adjust the height as needed
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: 5, // Number of recommended products
+                      itemCount: recommend.length, // Number of recommended products
                       itemBuilder: (context, index) {
                         return SizedBox(
                           width: 150,
@@ -81,7 +85,7 @@ class ProductPage extends StatelessWidget {
                             child: Container(
                               padding: EdgeInsets.all(16),
                               // Add recommended product content here
-                              child: Text('Recommended Product $index'),
+                              child: Text('Recommended Product ${recommend[index]}'),
                             ),
                           ),
                         );

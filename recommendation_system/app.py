@@ -2,8 +2,10 @@ import json
 from flask import Flask, jsonify
 import numpy as np
 import requests
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/recommendations/<int:product_index>', methods=['GET'])

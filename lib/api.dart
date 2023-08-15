@@ -64,7 +64,7 @@ class Dataset {
   Future<List<Dataset>> fetchAll() async {
     final response = await http.get(Uri.parse(
         'https://script.google.com/macros/s/AKfycbw08tF8pg8Qi4-uwyqeZKefbTb2OWAKhVydTCBSLgqhJ5y59gpTBvcIX-LwKpX7RfTRRg/exec'));
-    print(response.statusCode);
+
     if (response.statusCode == 200) {
       return decodeDataset(response.body);
     } else {

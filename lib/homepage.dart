@@ -1,22 +1,48 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:sparkathon_app/api.dart';
 import 'package:sparkathon_app/productPage.dart';
+import 'package:http/http.dart' as http;
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   final Future<List<Dataset>> data;
 
-  const HomePage({Key? key, required this.data}) : super(key: key);
+  HomePage({Key? key, required this.data}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  List<Dataset> finalData = [];
+
+  List<int> recommendedProductIndices = [];
+
+  Future<void> fetchRecommendations(int product_index) async {
+    final response = await http.get(Uri.parse('http://127.0.0.1:5000/recommendations/${product_index}'));
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      setState(() {
+        recommendedProductIndices = List<int>.from(data['recommendations']);
+        print(recommendedProductIndices);
+      });
+    } else {
+      // Handle error
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
-        title: Text('Carbonix'),
+        title: Text('Sustainix'),
         backgroundColor: Colors.black,
       ),
       body: Center(
         child: FutureBuilder<List<Dataset>>(
-          future: data,
+          future: widget.data,
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               print(snapshot.error);
@@ -25,6 +51,7 @@ class HomePage extends StatelessWidget {
 
             if (snapshot.hasData) {
               List<Dataset> shuffledData = List.from(snapshot.data!)..shuffle();
+              finalData = List.from(snapshot.data!);
               return dataList(shuffledData);
             } else {
               return Center(child: CircularProgressIndicator());
@@ -46,13 +73,11 @@ class HomePage extends StatelessWidget {
       itemBuilder: (context, index) {
         return InkWell(
             onTap: () {
-              // Handle card tap event here
-              // You can navigate to a new page or perform any other action
-              // For example, you can use Navigator to navigate to a new page:
+              fetchRecommendations(index);
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => ProductPage(data: dataList[index]),
+                MaterialPageRoute(                  
+                  builder: (context) => ProductPage(data: dataList[index], dataList:finalData, recommend:recommendedProductIndices),
                 ),
               );
             },
