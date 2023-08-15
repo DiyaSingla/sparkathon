@@ -7,16 +7,18 @@ class Items extends StatefulWidget {
 }
 
 class _ItemState extends State<Items> {
+  var d = Dataset.one();
   List<Dataset> Items = [];
 
+  Future<void> addValue() async {
+    Items = await d.fetchAll();
+    print(Items);
+  }
+
   @override
-  void initState() {
+  void initState(){
     super.initState();
-    Dataset.fetchAll().then((data) {
-      setState(() {
-        Items = data;
-      });
-    });
+    addValue();
   }
 
   @override

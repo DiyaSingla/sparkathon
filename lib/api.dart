@@ -2,21 +2,23 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class Dataset {
-  final int S_no;
-  final String brand;
-  final String product_name;
-  final double weight;
-  final double screen_size;
-  final double product_lifetime;
-  final double energy_demand;
-  final String assembly_location;
-  final String use_location;
-  final double manufacturing_impact;
-  final double transportation_impact;
-  final double end_of_life_impact;
-  final double use_impact;
-  final double carbon_footprint;
-  final double price;
+   int S_no = 0;
+   String brand = "";
+   String product_name = "";
+   double weight = 0.0;
+   double screen_size = 0.0;
+   double product_lifetime = 0.0;
+   double energy_demand = 0.0;
+   String assembly_location = "";
+   String use_location = "";
+   double manufacturing_impact = 0.0;
+   double transportation_impact = 0.0;
+   double end_of_life_impact = 0.0;
+   double use_impact = 0.0;
+   double carbon_footprint = 0.0;
+   double price = 0.0;
+
+  Dataset.one() {}
 
   Dataset(
       {required this.S_no,
@@ -54,12 +56,19 @@ class Dataset {
         price: json['price (in Rs)']);
   }
 
-  static Future<List<Dataset>> fetchAll() async {
+  List<Dataset> decodeDataset(String responseBody) {
+    final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
+    return parsed
+        .map<Dataset>((json) => Dataset.fromJson(json))
+        .toList();
+  }
+
+  Future<List<Dataset>> fetchAll() async {
     final response = await http.get(Uri.parse(
         'https://script.google.com/macros/s/AKfycbw08tF8pg8Qi4-uwyqeZKefbTb2OWAKhVydTCBSLgqhJ5y59gpTBvcIX-LwKpX7RfTRRg/exec'));
+    print(response.statusCode);
     if (response.statusCode == 200) {
-      List<dynamic> jsonResponse = jsonDecode(response.body);
-      return jsonResponse.map((data) => Dataset.fromJson(data)).toList();
+      return decodeDataset(response.body);
     } else {
       throw Exception('failed to fetch data from API');
     }
