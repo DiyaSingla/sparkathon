@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sparkathon_app/page.dart';
 
-import 'api.dart';
-import 'homepage.dart';
+import 'logo_page.dart';
 
 void main() {
   runApp(
@@ -10,14 +8,17 @@ void main() {
   );
 }
 
-var d = Dataset.one();
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        primaryColor: Colors.black, // Set the primary color to black
+      ),
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(data: d.fetchAll()),
+      home: MyLogoPage(
+        title: "CO2",
+      ),
     );
   }
 }
