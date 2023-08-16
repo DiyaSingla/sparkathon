@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:sparkathon_app/api.dart';
 import 'package:sparkathon_app/productCard.dart';
+import 'package:http/http.dart' as http;
 
 class ProductPage extends StatefulWidget {
   final Dataset data;
@@ -19,6 +22,22 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProductPageState extends State<ProductPage> {
+  List<int> recommendedProductIndices = [];
+  List<Dataset> finalData = [];
+
+  Future<void> fetchRecommendations(int product_index) async {
+    final response = await http.get(
+        Uri.parse('http://127.0.0.1:5000/recommendations/${product_index}'));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      setState(() {
+        recommendedProductIndices = List<int>.from(data['recommendations']);
+        print(recommendedProductIndices);
+      });
+    } else {}
+  }
+
   @override
   Widget build(BuildContext context) {
     print(widget.recommend);
@@ -66,8 +85,10 @@ class _ProductPageState extends State<ProductPage> {
                   Text('Price: Rs. ${widget.data.price}'),
                   Text('Screen Size: ${widget.data.screen_size} inches'),
                   Text('Weight: ${widget.data.weight} kg'),
-                  Text('Annual Energy Demand: ${widget.data.energy_demand} kWh'),
-                  Text('Carbon Footprint: ${widget.data.carbon_footprint} kg CO2'),
+                  Text(
+                      'Annual Energy Demand: ${widget.data.energy_demand} kWh'),
+                  Text(
+                      'Carbon Footprint: ${widget.data.carbon_footprint} kg CO2'),
                 ],
               ),
             ),
@@ -82,21 +103,36 @@ class _ProductPageState extends State<ProductPage> {
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 16),
-                  
+
                   // Recommended product cards
                   SizedBox(
                     height: 300, // Adjust the height as needed
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      
-                      itemCount:
-                          5, // Number of recommended products
+
+                      itemCount: 5, // Number of recommended products
                       itemBuilder: (context, index) {
                         return SizedBox(
-                          width:200,
+                            width: 200,
+                            child: InkWell(
+                                onTap: () async {
+                                  await fetchRecommendations(index);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ProductPage(
+                                          data: widget.dataList[
+                                              widget.recommend[index]],
+                                          dataList: finalData,
+                                          recommend: recommendedProductIndices),
+                                    ),
+                                  );
+                                },
+                                child: buildProductCard(
+                                    widget.dataList, widget.recommend[index]))
 
-                          child: buildProductCard(widget.dataList, widget.recommend[index])
-                        );
+                            //child: buildProductCard(widget.dataList, widget.recommend[index])
+                            );
                       },
                     ),
                   ),
