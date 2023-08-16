@@ -23,15 +23,22 @@ class ProductPage extends StatefulWidget {
 
 class _ProductPageState extends State<ProductPage> {
   List<int> recommendedProductIndices = [];
-  List<Dataset> finalData = [];
+  //List<Dataset> finalData = [];
+
+  @override
+  void initState() {
+    super.initState();
+    recommendedProductIndices.addAll(widget.recommend);
+  }
 
   Future<void> fetchRecommendations(int product_index) async {
     final response = await http.get(
-        Uri.parse('http://127.0.0.1:5000/recommendations/${product_index}'));
+        Uri.parse('https://sustainable-recommender.vercel.app/recommendations/${product_index}'));
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       setState(() {
+        recommendedProductIndices.clear();
         recommendedProductIndices = List<int>.from(data['recommendations']);
         print(recommendedProductIndices);
       });
@@ -127,7 +134,7 @@ class _ProductPageState extends State<ProductPage> {
                                       builder: (context) => ProductPage(
                                           data: widget.dataList[
                                               recommendedProductIndex],
-                                          dataList: finalData,
+                                          dataList: widget.dataList,
                                           recommend: recommendedProductIndices),
                                     ),
                                   );
