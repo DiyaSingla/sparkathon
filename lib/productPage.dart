@@ -116,13 +116,17 @@ class _ProductPageState extends State<ProductPage> {
                             width: 200,
                             child: InkWell(
                                 onTap: () async {
-                                  await fetchRecommendations(index);
+                                  int recommendedProductIndex = widget
+                                          .recommend[
+                                      index]; // Get the recommended product index
+                                  await fetchRecommendations(
+                                      recommendedProductIndex); // Fetch recommendations for the recommended product
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => ProductPage(
                                           data: widget.dataList[
-                                              widget.recommend[index]],
+                                              recommendedProductIndex],
                                           dataList: finalData,
                                           recommend: recommendedProductIndices),
                                     ),
