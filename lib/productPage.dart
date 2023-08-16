@@ -32,8 +32,8 @@ class _ProductPageState extends State<ProductPage> {
   }
 
   Future<void> fetchRecommendations(int product_index) async {
-    final response = await http.get(
-        Uri.parse('https://sustainable-recommender.vercel.app/recommendations/${product_index}'));
+    final response = await http.get(Uri.parse(
+        'https://sustainable-recommender.vercel.app/recommendations/${product_index}'));
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
@@ -66,8 +66,9 @@ class _ProductPageState extends State<ProductPage> {
           children: [
             // Brand icon photo
             Container(
+              height: 100,
               alignment: Alignment.center,
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(2),
               child: Image.asset('images/${widget.data.brand}.png'),
             ),
             // Laptop image
@@ -87,15 +88,84 @@ class _ProductPageState extends State<ProductPage> {
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 16),
-                  Text('Brand: ${widget.data.brand}'),
-                  Text('Product Name: ${widget.data.product_name}'),
-                  Text('Price: Rs. ${widget.data.price}'),
-                  Text('Screen Size: ${widget.data.screen_size} inches'),
-                  Text('Weight: ${widget.data.weight} kg'),
-                  Text(
-                      'Annual Energy Demand: ${widget.data.energy_demand} kWh'),
-                  Text(
-                      'Carbon Footprint: ${widget.data.carbon_footprint} kg CO2'),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Brand: ',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(text: '${widget.data.brand}'),
+                      ],
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Product Name: ',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(text: '${widget.data.product_name}'),
+                      ],
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Price: ',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(text: 'Rs. ${widget.data.price}'),
+                      ],
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Screen Size: ',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(text: '${widget.data.screen_size} inches'),
+                      ],
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Weight: ',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(text: '${widget.data.weight} kg'),
+                      ],
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Annual Energy Demand: ',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(text: '${widget.data.energy_demand} kWh'),
+                      ],
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Carbon Footprint: ',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(
+                            text: '${widget.data.carbon_footprint} kg CO2'),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),

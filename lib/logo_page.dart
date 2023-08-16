@@ -32,19 +32,22 @@ class _MyLogoPageState extends State<MyLogoPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Center(
-          child: Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('images/logo.png'),
-                //fit: BoxFit.cover,
+    return Container(
+      color: Colors.black, // Set the background color to black
+      child: Stack(
+        children: [
+          Center(
+            child: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('images/sustainix_logo.png'),
+                  //fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
