@@ -28,19 +28,16 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> fetchRecommendations(int product_index) async {
-    
-    final response = await http.get(
-        Uri.parse('https://sustainable-recommender.vercel.app/recommendations/${product_index}'));
-    
+    final response = await http.get(Uri.parse(
+        'https://sustainable-recommender.vercel.app/recommendations/${product_index}'));
+
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       setState(() {
         recommendedProductIndices = List<int>.from(data['recommendations']);
         print(recommendedProductIndices);
       });
-    } else {
-
-    }
+    } else {}
   }
 
   @override
@@ -73,28 +70,56 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget dataList(List<Dataset> dataList) {
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2, // Number of columns
-        crossAxisSpacing: 2, // Spacing between columns
-        mainAxisSpacing: 2, // Spacing between rows
-      ),
-      itemCount: dataList.length,
-      itemBuilder: (context, index) {
-        return InkWell(
-            onTap: () async {
-              await fetchRecommendations(index);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ProductPage(
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        double tileSpacing = 8.0; // Adjust the spacing between tiles
+        double screenWidth = constraints.maxWidth;
+
+        int crossAxisCount = 2; // Default value for crossAxisCount
+
+        if (screenWidth >= 600) {
+          crossAxisCount = 3; // Adjust based on your desired breakpoint
+        }
+        if (screenWidth >= 900) {
+          crossAxisCount = 4; // Adjust based on your desired breakpoint
+        }
+
+        double tileWidth =
+            (screenWidth - (tileSpacing * (crossAxisCount - 1))) /
+                crossAxisCount;
+        double tileHeight =
+            tileWidth * 1.5; // Adjust the height based on your preference
+
+        return GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: crossAxisCount,
+            crossAxisSpacing: tileSpacing,
+            mainAxisSpacing: tileSpacing,
+          ),
+          itemCount: dataList.length,
+          itemBuilder: (context, index) {
+            return InkWell(
+              onTap: () async {
+                await fetchRecommendations(index);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProductPage(
                       data: dataList[index],
                       dataList: finalData,
-                      recommend: recommendedProductIndices),
-                ),
-              );
-            },
-            child: buildProductCard(dataList, index));
+                      recommend: recommendedProductIndices,
+                    ),
+                  ),
+                );
+              },
+              child: Container(
+                width: tileWidth,
+                height: tileHeight,
+                child: buildProductCard(dataList, index),
+              ),
+            );
+          },
+        );
       },
     );
   }
