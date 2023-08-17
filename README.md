@@ -2,8 +2,6 @@
 
 Sustainix is an innovative and impactful recommendation system designed to contribute to the United Nations' sustainability goals. By harnessing the power of data-driven insights, Sustainix empowers users to make environmentally conscious choices in their shopping habits. The system analyzes and provides recommendations based on the carbon footprint values of products, ensuring that users can opt for more eco-friendly alternatives without compromising their preferences, specifications, and budget.
 
-But it's not just a recommendation system, it's a catalyst for positive change. By combining cutting-edge technology with environmental awareness, we've created a recommendation system that empowers individuals to make choices that resonate beyond their personal preferences, ultimately contributing to a greener planet and a more sustainable future.
-
 ## Key features
 
 ### Carbon Footprint-Based Recommendations:
@@ -19,4 +17,8 @@ Every recommendation is powered by a meticulously compiled dataset crafted by ou
 
 Embarking on a sustainable journey has never been more inviting. Sustainix is showcased through an engaging web app designed using the versatile Flutter framework. Step into a world where products are displayed with a purpose. Seamlessly navigate through a diverse array of items and be enlightened by insights that facilitate informed and sustainable choices. The web app can be accessed [here](https://sustainix.netlify.app).
 
+## Impact:
 
+Sustainix addresses a critical aspect of modern consumerism - environmental responsibility. By integrating information about carbon footprints into the decision-making process, users are empowered to make choices that positively impact the planet. This innovative approach aligns with global sustainability goals and contributes to creating a more sustainable future.
+
+__This is more than just a recommendation system, it's a catalyst for positive change. By combining cutting-edge technology with environmental awareness, we've created a recommendation system that empowers individuals to make choices that resonate beyond their personal preferences, ultimately contributing to a greener planet and a more sustainable future.__
