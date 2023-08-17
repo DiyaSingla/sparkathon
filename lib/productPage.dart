@@ -99,6 +99,7 @@ class _ProductPageState extends State<ProductPage> {
                       ],
                     ),
                   ),
+                  //Text("S_No: ${widget.data.S_no}"),
                   RichText(
                     text: TextSpan(
                       children: [

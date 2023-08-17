@@ -28,8 +28,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> fetchRecommendations(int product_index) async {
-    final response = await http.get(Uri.parse(
-        'https://sustainable-recommender.vercel.app/recommendations/${product_index}'));
+    final response = await http.get(
+        Uri.parse('http://127.0.0.1:5000/recommendations/${product_index}'));
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
           itemBuilder: (context, index) {
             return InkWell(
               onTap: () async {
-                await fetchRecommendations(index);
+                await fetchRecommendations(dataList[index].S_no);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
