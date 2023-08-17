@@ -22,7 +22,7 @@ def get_recommendations(product_index, num_recommendations=5):
         if(i==product_index):
             continue
         
-        if (r[i]['carbon_footprint (kg)'] < r[product_index]['carbon_footprint (kg)'] and r[i]['price (in Rs)'] <= r[product_index]['price (in Rs)']+5000):
+        if (r[i]['carbon_footprint (kg)'] < r[product_index]['carbon_footprint (kg)'] and r[i]['price (in Rs)'] <= r[product_index]['price (in Rs)']+10000):
             recommended_indices.append(int(i))
         if(len(recommended_indices)==num_recommendations):
             break
