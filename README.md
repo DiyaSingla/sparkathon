@@ -2,7 +2,7 @@
 
 Sustainix is an innovative and impactful recommendation system designed to contribute to the United Nations' sustainability goals. By harnessing the power of data-driven insights, Sustainix empowers users to make environmentally conscious choices in their shopping habits. The system analyzes and provides recommendations based on the carbon footprint values of products, ensuring that users can opt for more eco-friendly alternatives without compromising their preferences, specifications, and budget.
 
-This isn't just a recommendation system; it's a paradigm shift. By combining cutting-edge technology with environmental awareness, we've created a recommendation system that empowers individuals to make choices that resonate beyond their personal preferences, ultimately contributing to a greener planet and a more sustainable future.
+But it's not just a recommendation system, it's a catalyst for positive change. By combining cutting-edge technology with environmental awareness, we've created a recommendation system that empowers individuals to make choices that resonate beyond their personal preferences, ultimately contributing to a greener planet and a more sustainable future.
 
 ## Key features
 
@@ -13,7 +13,7 @@ The API for generating the recommendations for a product can be accessed from [h
 
 ### Curated Dataset:
 
-Every recommendation is powered by a meticulously compiled dataset crafted by our dedicated team. This dataset is the result of in-depth research and compilation of product carbon footprint reports from renowned laptop brands including Dell, Acer, Asus, Lenovo, and HP. This ensures that the recommendations provided are not only accurate but also relevant to real-world products. This dataset has been deployed as an API [here](https://script.google.com/macros/s/AKfycbw08tF8pg8Qi4-uwyqeZKefbTb2OWAKhVydTCBSLgqhJ5y59gpTBvcIX-LwKpX7RfTRRg/exec).
+Every recommendation is powered by a meticulously compiled dataset crafted by our dedicated team. This dataset is the result of in-depth research and compilation of product carbon footprint reports from renowned laptop brands including Dell, Acer, Asus, Lenovo, and HP. This ensures that the recommendations provided are not only accurate but also relevant to real-world products. This dataset has been deployed [here](https://script.google.com/macros/s/AKfycbw08tF8pg8Qi4-uwyqeZKefbTb2OWAKhVydTCBSLgqhJ5y59gpTBvcIX-LwKpX7RfTRRg/exec).
 
 ### Interactive Web App:
 
