@@ -75,20 +75,14 @@ class _HomePageState extends State<HomePage> {
         double tileSpacing = 8.0; // Adjust the spacing between tiles
         double screenWidth = constraints.maxWidth;
 
-        int crossAxisCount = 2; // Default value for crossAxisCount
-
-        if (screenWidth >= 600) {
-          crossAxisCount = 3; // Adjust based on your desired breakpoint
-        }
-        if (screenWidth >= 900) {
-          crossAxisCount = 4; // Adjust based on your desired breakpoint
-        }
+        int crossAxisCount = (screenWidth ~/ 200.0)
+            .clamp(1, 6); // Set the max to 6 tiles per row
 
         double tileWidth =
             (screenWidth - (tileSpacing * (crossAxisCount - 1))) /
                 crossAxisCount;
         double tileHeight =
-            tileWidth * 1.5; // Adjust the height based on your preference
+            tileWidth * 3; // Adjust the height based on your preference
 
         return GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
