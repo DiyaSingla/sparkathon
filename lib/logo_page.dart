@@ -40,7 +40,7 @@ class _MyLogoPageState extends State<MyLogoPage> {
             child: Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('images/sustainix_logo.png'),
+                  image: AssetImage('images/logo.jpeg'),
                   //fit: BoxFit.cover,
                 ),
               ),

@@ -12,10 +12,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: "Sustainix",
+      title: "SustainPick",
       debugShowCheckedModeBanner: false,
       home: MyLogoPage(
-        title: "Sustainix",
+        title: "SustainPick",
       ),
     );
   }
