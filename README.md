@@ -15,7 +15,7 @@ Every recommendation is powered by a meticulously compiled dataset crafted by ou
 
 ### Interactive Web App:
 
-Embarking on a sustainable journey has never been more inviting. SustainPick is showcased through an engaging web app designed using the versatile Flutter framework. Step into a world where products are displayed with a purpose. Seamlessly navigate through a diverse array of items and be enlightened by insights that facilitate informed and sustainable choices. The web app can be accessed [here](https://sustainix.netlify.app).
+Embarking on a sustainable journey has never been more inviting. SustainPick is showcased through an engaging web app designed using the versatile Flutter framework. Step into a world where products are displayed with a purpose. Seamlessly navigate through a diverse array of items and be enlightened by insights that facilitate informed and sustainable choices. The web app can be accessed [here](https://sustainpick.netlify.app/).
 
 ## Impact:
 
