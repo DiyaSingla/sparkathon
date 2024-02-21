@@ -28,8 +28,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> fetchRecommendations(int product_index) async {
-    final response = await http.get(
-        Uri.parse('https://sustainable-recommender.vercel.app/recommendations/${product_index}'));
+    final response = await http.get(Uri.parse(
+        'https://sustainable-recommender.vercel.app/recommendations/${product_index}'));
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
